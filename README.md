@@ -4,6 +4,13 @@ Runpak is a local developer tool for interactively testing npm and pnpm packages
 
 Point Runpak at a local package root, write a small TypeScript or JavaScript entry file, then run it without creating a throwaway app.
 
+<table>
+  <tr>
+    <td><img width="1860" height="1177" alt="browser" src="https://github.com/user-attachments/assets/2496266e-3569-4381-9ee2-febdfe4fdd65" /></td>
+    <td><img width="1860" height="1177" alt="node" src="https://github.com/user-attachments/assets/8f47963b-d606-40d6-998b-c2fd4c9687cd" /></td>
+  </tr>
+</table>
+
 ## Install
 
 ```bash
