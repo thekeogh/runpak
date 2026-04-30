@@ -50,4 +50,5 @@ const result = await client.items.list();
 return result;
 ```
 
-Runpak does not install or build your package. Build the package yourself first if your source needs compilation.
+> [!NOTE]
+> Runpak does not install or build your package. Build the package yourself first if your source needs compilation.
