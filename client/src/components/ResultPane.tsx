@@ -1,5 +1,6 @@
 import type { PointerEvent, ReactNode } from 'react';
-import { CornerDownRight, Terminal } from 'lucide-react';
+import { useState } from 'react';
+import { Check, Copy, CornerDownRight, Terminal } from 'lucide-react';
 import { displayValue } from '../lib/format';
 import type { LogEntry } from '../lib/types';
 
@@ -49,10 +50,21 @@ function HighlightedReturn({ value }: { value: unknown }) {
 }
 
 export function ResultPane({ logs, returnValue, hasReturn, onResizeStart }: ResultPaneProps) {
+  const [copied, setCopied] = useState(false);
+  const returnText = hasReturn ? displayValue(returnValue) : '';
+
+  async function copyReturnValue() {
+    if (!hasReturn) return;
+
+    await navigator.clipboard.writeText(returnText);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1200);
+  }
+
   return (
     <section className="result-pane" aria-label="Execution results">
       <div className="result-section stdout-section">
-        <div className="panel-header">
+        <div className="panel-header return-header">
           <Terminal size={18} aria-hidden="true" />
           <span>Stdout</span>
         </div>
@@ -72,8 +84,20 @@ export function ResultPane({ logs, returnValue, hasReturn, onResizeStart }: Resu
       <div className="result-divider" onPointerDown={onResizeStart} role="separator" aria-orientation="horizontal" />
       <div className="result-section return-section">
         <div className="panel-header">
-          <CornerDownRight size={18} aria-hidden="true" />
-          <span>Return</span>
+          <div className="panel-title">
+            <CornerDownRight size={18} aria-hidden="true" />
+            <span>Return</span>
+          </div>
+          <button
+            className="copy-return-button"
+            disabled={!hasReturn}
+            onClick={copyReturnValue}
+            title={hasReturn ? 'Copy return value' : 'No return value to copy'}
+            type="button"
+          >
+            {copied ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
+            <span className="sr-only">{copied ? 'Copied return value' : 'Copy return value'}</span>
+          </button>
         </div>
         {hasReturn ? <HighlightedReturn value={returnValue} /> : <div className="empty-state">No return value yet</div>}
       </div>

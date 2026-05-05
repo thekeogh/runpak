@@ -255,6 +255,39 @@ button {
   color: var(--accent);
 }
 
+.return-header {
+  justify-content: space-between;
+}
+
+.panel-title {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.copy-return-button {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #8e9aaf;
+  cursor: pointer;
+}
+
+.copy-return-button:hover:not(:disabled) {
+  color: var(--accent);
+  background: #242c3d;
+}
+
+.copy-return-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
 .editor-host {
   min-height: 0;
 }
