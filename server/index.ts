@@ -19,7 +19,8 @@ app.route('/api', resolveRoute);
 app.route('/api', bundleRoute);
 app.route('/api', executeRoute);
 app.use('/assets/*', serveStatic({ root: distRoot }));
-app.get('/favicon.ico', serveStatic({ path: path.join(distRoot, 'favicon.ico') }));
+app.get('/favicon.svg', serveStatic({ path: path.join(distRoot, 'favicon.svg') }));
+app.get('/favicon.ico', (c) => c.redirect('/favicon.svg'));
 app.get('*', serveStatic({ path: path.join(distRoot, 'index.html') }));
 
 serve({ fetch: app.fetch, port }, () => {
